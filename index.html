@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaala — Temporal Intelligence</title>
+    <meta name="description" content="Kaala maps your life and the world to time. Dasha timelines, transit signals, validated event windows — for individuals and institutions.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #060608;
+            --surface: #0d0d11;
+            --border: #1a1a22;
+            --text: #e5e5e5;
+            --muted: #6b6b7a;
+            --accent: #7c6fff;
+            --accent2: #00d4aa;
+            --white: #fafafa;
+        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+        ::selection { background: var(--accent); color: var(--bg); }
+
+        nav { position: fixed; top: 0; width: 100%; background: rgba(6,6,8,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 100; border-bottom: 1px solid var(--border); }
+        .nav-inner { max-width: 1080px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        .nav-byline { font-size: 12px; color: var(--muted); }
+        .nav-byline a { color: var(--accent2); opacity: 0.8; }
+        .nav-byline a:hover { opacity: 1; }
+
+        /* Hero */
+        .hero { padding: 160px 24px 100px; text-align: center; position: relative; overflow: hidden; }
+        .hero-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at 50% 20%, rgba(124,111,255,0.12) 0%, transparent 65%); pointer-events: none; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; padding: 8px 20px; border: 1px solid rgba(124,111,255,0.25); border-radius: 100px; }
+        .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+        .hero h1 { font-size: 60px; font-weight: 300; color: var(--white); margin-bottom: 24px; line-height: 1.1; letter-spacing: -2px; }
+        .hero h1 strong { font-weight: 700; background: linear-gradient(135deg, #fff 30%, rgba(124,111,255,0.8)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-sub { font-size: 18px; color: var(--muted); max-width: 540px; margin: 0 auto 16px; font-weight: 300; line-height: 1.7; }
+        .hero-proof { font-size: 13px; color: var(--muted); margin-bottom: 56px; }
+        .hero-proof a { color: var(--accent2); }
+
+        /* CTA block */
+        .cta-block { max-width: 680px; margin: 0 auto; }
+        .tier-tabs { display: flex; gap: 1px; background: var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+        .tier-tab { flex: 1; text-align: center; padding: 12px; font-size: 13px; font-weight: 500; cursor: pointer; background: var(--surface); color: var(--muted); transition: all 0.2s; border: none; font-family: inherit; }
+        .tier-tab.active { background: var(--accent); color: white; }
+        .tier-content { display: none; }
+        .tier-content.active { display: block; }
+        .tier-form { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: left; }
+        .tier-form-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 500; margin-bottom: 8px; }
+        .tier-form h3 { font-size: 20px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+        .tier-form p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+        .form-row { display: flex; gap: 8px; }
+        .form-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 14px; color: var(--white); font-family: inherit; outline: none; transition: border-color 0.2s; }
+        .form-input:focus { border-color: var(--accent); }
+        .form-input::placeholder { color: var(--muted); }
+        .form-btn { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity 0.2s, transform 0.1s; white-space: nowrap; }
+        .form-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .form-note { font-size: 11px; color: var(--muted); margin-top: 12px; }
+        .tier-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+        .tier-feature { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+        .tier-feature::before { content: '✓'; color: var(--accent2); font-weight: 600; flex-shrink: 0; }
+
+        /* Signal preview */
+        .signals { max-width: 1080px; margin: 100px auto; padding: 0 24px; }
+        .signals-label { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; text-align: center; }
+        .signals-title { font-size: 32px; font-weight: 300; color: var(--white); text-align: center; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .signals-desc { font-size: 15px; color: var(--muted); text-align: center; margin-bottom: 56px; }
+        .signal-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 16px; overflow: hidden; }
+        .signal-card { background: var(--surface); padding: 36px 28px; }
+        .signal-flag { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; padding: 4px 10px; border-radius: 6px; margin-bottom: 20px; font-weight: 500; }
+        .flag-warning { background: rgba(245,166,35,0.1); color: #f5a623; border: 1px solid rgba(245,166,35,0.2); }
+        .flag-elevated { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+        .flag-watch { background: rgba(124,111,255,0.1); color: var(--accent); border: 1px solid rgba(124,111,255,0.2); }
+        .signal-country { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
+        .signal-card h3 { font-size: 20px; font-weight: 500; color: var(--white); margin-bottom: 12px; line-height: 1.3; }
+        .signal-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+        .signal-data { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border); }
+        .signal-datum { font-size: 11px; color: var(--muted); }
+        .signal-datum strong { display: block; font-size: 14px; color: var(--white); font-weight: 600; margin-bottom: 2px; }
+        .signal-badge { font-size: 11px; padding: 4px 10px; background: rgba(0,212,170,0.1); color: var(--accent2); border-radius: 6px; border: 1px solid rgba(0,212,170,0.2); display: inline-block; margin-top: 16px; }
+
+        /* Stack section */
+        .stack { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
+        .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 16px; overflow: hidden; margin-top: 48px; }
+        .stack-item { background: var(--surface); padding: 32px 28px; }
+        .stack-item-num { font-size: 11px; font-weight: 500; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; }
+        .stack-item h4 { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+        .stack-item p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+        .stack-item code { font-size: 11px; color: var(--accent2); background: rgba(0,212,170,0.08); padding: 2px 6px; border-radius: 4px; font-family: 'SF Mono', 'Fira Code', monospace; }
+
+        /* Comparison */
+        .compare { max-width: 800px; margin: 0 auto; padding: 80px 24px; }
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+        .compare-col { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .compare-head { padding: 16px 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+        .compare-head.personal { background: rgba(124,111,255,0.08); color: var(--accent); border-bottom: 1px solid rgba(124,111,255,0.15); }
+        .compare-head.enterprise { background: rgba(0,212,170,0.06); color: var(--accent2); border-bottom: 1px solid rgba(0,212,170,0.12); }
+        .compare-rows { background: var(--surface); }
+        .compare-row { padding: 12px 20px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .compare-row:last-child { border-bottom: none; }
+        .compare-row::before { content: '✓'; color: var(--accent2); font-size: 12px; flex-shrink: 0; }
+        .compare-price { padding: 20px; background: var(--surface); font-size: 12px; color: var(--muted); }
+        .compare-price strong { display: block; font-size: 20px; color: var(--white); font-weight: 600; margin-bottom: 4px; }
+
+        /* Research bar */
+        .research-bar { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 24px; text-align: center; }
+        .research-bar-inner { max-width: 700px; margin: 0 auto; }
+        .research-bar p { font-size: 14px; color: var(--muted); }
+        .research-bar a { color: var(--accent2); font-weight: 500; }
+        .research-bar strong { color: var(--white); }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px 24px; }
+        footer p { font-size: 12px; color: #333340; }
+        footer a { color: #4a4a5a; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; letter-spacing: -1px; }
+            .hero-sub { font-size: 15px; }
+            .signal-cards { grid-template-columns: 1fr; }
+            .stack-grid { grid-template-columns: 1fr; }
+            .compare-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">Kaala<span>.</span></div>
+            <div class="nav-byline">by <a href="../">Tempora Research</a></div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-badge">Early Access</div>
+        <h1>Time has a pattern.<br><strong>We've decoded it.</strong></h1>
+        <p class="hero-sub">Kaala is a temporal intelligence engine built on 2,500 years of Vedic astronomical systems — validated against 300+ historical events across six nations.</p>
+        <p class="hero-proof">Built on <a href="../">Tempora Research</a> · India 2027 · Russia 2028 · US 2029 — all live, all falsifiable</p>
+
+        <div class="cta-block">
+            <div class="tier-tabs">
+                <button class="tier-tab active" onclick="switchTier('personal', this)">Personal</button>
+                <button class="tier-tab" onclick="switchTier('enterprise', this)">Enterprise</button>
+            </div>
+
+            <div id="tier-personal" class="tier-content active">
+                <div class="tier-form">
+                    <div class="tier-form-label">Kaala Personal</div>
+                    <h3>Your life, mapped to time</h3>
+                    <p>Your natal chart scored against live planetary positions. Know which windows are active, what they historically mean, and what's coming.</p>
+                    <div class="tier-features">
+                        <div class="tier-feature">Full Vimshottari dasha timeline (mahadasha → pratyantara)</div>
+                        <div class="tier-feature">Live transit overlay — which signals are active today</div>
+                        <div class="tier-feature">Monthly window score with narrative interpretation</div>
+                        <div class="tier-feature">Sade Sati, Guru transit, and nodal return alerts</div>
+                    </div>
+                    <form action="https://formspree.io/f/xgopozlo" method="POST">
+                        <input type="hidden" name="tier" value="personal">
+                        <input type="hidden" name="_subject" value="Kaala Personal Waitlist">
+                        <div class="form-row">
+                            <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
+                            <button type="submit" class="form-btn">Join waitlist</button>
+                        </div>
+                    </form>
+                    <div class="form-note">Free early access · No credit card · Ships Q3 2026</div>
+                </div>
+            </div>
+
+            <div id="tier-enterprise" class="tier-content">
+                <div class="tier-form">
+                    <div class="tier-form-label">Kaala Enterprise</div>
+                    <h3>Temporal risk signals for institutions</h3>
+                    <p>Country-level event windows, validated signatures, API access, and custom chart analysis for fund managers, geopolitical analysts, and research teams.</p>
+                    <div class="tier-features">
+                        <div class="tier-feature">6-nation prediction windows with confluence scores</div>
+                        <div class="tier-feature">API access to scoring engine (JSON responses)</div>
+                        <div class="tier-feature">Custom national or corporate founding chart analysis</div>
+                        <div class="tier-feature">Monthly research briefings from Tempora team</div>
+                    </div>
+                    <form action="https://formspree.io/f/xgopozlo" method="POST">
+                        <input type="hidden" name="tier" value="enterprise">
+                        <input type="hidden" name="_subject" value="Kaala Enterprise Application">
+                        <div class="form-row">
+                            <input type="email" name="email" class="form-input" placeholder="you@institution.com" required>
+                            <button type="submit" class="form-btn">Apply →</button>
+                        </div>
+                    </form>
+                    <div class="form-note">Priority access · Pricing on request · Onboarding call included</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Research provenance bar -->
+    <div class="research-bar">
+        <div class="research-bar-inner">
+            <p>Kaala runs on the <a href="../">Tempora Research engine</a> — <strong>6 research notes</strong>, <strong>300+ historical data points</strong>, <strong>9 calibrated astrological signatures</strong>, publicly backtested and scored. Not astrology. <strong>Temporal data science.</strong></p>
+        </div>
+    </div>
+
+    <!-- Live signals preview -->
+    <div class="signals">
+        <div class="signals-label">Validated Predictions</div>
+        <div class="signals-title">What the engine sees</div>
+        <div class="signals-desc">These windows survived backcalibration against historical events. All falsifiable, all publicly tracked.</div>
+
+        <div class="signal-cards">
+            <div class="signal-card">
+                <div><span class="signal-flag flag-warning">Watch · Dec 2027</span></div>
+                <div class="signal-country">India</div>
+                <h3>Ketu over Cancer stellium + Angarak Yoga</h3>
+                <p>Ketu transits India's 5-planet Cancer stellium while Mars–Rahu conjunction forms in Capricorn. Dual-axis activation during Rahu–Rahu mahadasha. The chart's most charged configuration since 2019–2020.</p>
+                <div class="signal-data">
+                    <div class="signal-datum"><strong>saturn_moon_opp</strong>Primary signal (3.6x lift)</div>
+                    <div class="signal-datum"><strong>Rahu–Rahu</strong>Active dasha</div>
+                </div>
+                <div class="signal-badge">Validated · Research Note #006</div>
+            </div>
+
+            <div class="signal-card">
+                <div><span class="signal-flag flag-elevated">Elevated · Feb 2028</span></div>
+                <div class="signal-country">Russia</div>
+                <h3>Angarak Yoga at peak — Mars conjunct Rahu</h3>
+                <p>Russia's #1 validated signal (5.46x historical lift) fires as Rahu return approaches. Every significant Russian geopolitical event in the backtest overlaps this signature. Historically associated with sudden military action.</p>
+                <div class="signal-data">
+                    <div class="signal-datum"><strong>mars_rahu_conj</strong>5.46x lift</div>
+                    <div class="signal-datum"><strong>Rahu return</strong>18.6yr cycle</div>
+                </div>
+                <div class="signal-badge">Validated · Research Note #006</div>
+            </div>
+
+            <div class="signal-card">
+                <div><span class="signal-flag flag-watch">Watch · Nov 2029</span></div>
+                <div class="signal-country">United States</div>
+                <h3>Rahu over Gemini stellium — 18-year cycle peak</h3>
+                <p>Ketu moves into Gemini (US natal stellium: Sun/Mars/Jupiter/Venus) as malefic opposition simultaneously fires. Saturn transit of natal Sun (4.31x lift) approaches. Venus–Rahu mahadasha active.</p>
+                <div class="signal-data">
+                    <div class="signal-datum"><strong>rahu_over_stell</strong>2.45x lift</div>
+                    <div class="signal-datum"><strong>Venus–Rahu</strong>Active dasha</div>
+                </div>
+                <div class="signal-badge">Validated · Research Note #006</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Stack -->
+    <div class="stack">
+        <div class="signals-label" style="text-align:center">The Kaala Stack</div>
+        <div class="signals-title" style="text-align:center">How it works</div>
+        <div class="signals-desc" style="text-align:center">Each layer is independently testable and publicly documented.</div>
+
+        <div class="stack-grid">
+            <div class="stack-item">
+                <div class="stack-item-num">Layer 01</div>
+                <h4>Swiss Ephemeris</h4>
+                <p>Sub-arc-minute planetary positions via <code>pyswisseph</code>. Lahiri ayanamsa for sidereal coordinates. The same computational core used by professional Vedic software.</p>
+            </div>
+            <div class="stack-item">
+                <div class="stack-item-num">Layer 02</div>
+                <h4>Vimshottari Dasha Engine</h4>
+                <p>Full 120-year dasha timeline computed from natal Moon nakshatra. Mahadasha → antardasha → pratyantara (3 levels). Used to determine the operating period of any chart.</p>
+            </div>
+            <div class="stack-item">
+                <div class="stack-item-num">Layer 03</div>
+                <h4>Transit Overlay</h4>
+                <p>Current planetary positions overlaid on natal chart. Computes Vedic special aspects, Sade Sati phases, Guru transit house position, and nodal activations.</p>
+            </div>
+            <div class="stack-item">
+                <div class="stack-item-num">Layer 04</div>
+                <h4>Calibrated Signature Scoring</h4>
+                <p>9 astrological signatures scored 0–1.0 each. Weights derived from Monte Carlo calibration against 300+ historical events. Generic weights replaced by chart-specific empirical lifts. <em>Research Note #005.</em></p>
+            </div>
+            <div class="stack-item">
+                <div class="stack-item-num">Layer 05</div>
+                <h4>Confluence Engine</h4>
+                <p>Weighted sum of active signatures → a single confluence score (0–100%). Windows above threshold where ≥1 validated signature fires are surfaced as predictions.</p>
+            </div>
+            <div class="stack-item">
+                <div class="stack-item-num">Layer 06</div>
+                <h4>Public Scoring &amp; Falsifiability</h4>
+                <p>Every prediction has a specific date, a specific claim, and a public tracker. The system is wrong until proven otherwise. Hits and misses are both recorded.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personal vs Enterprise comparison -->
+    <div class="compare">
+        <div class="signals-label" style="text-align:center">Plans</div>
+        <div class="signals-title" style="text-align:center">Personal or Enterprise</div>
+        <div class="signals-desc" style="text-align:center">Same engine. Different lens.</div>
+
+        <div class="compare-grid">
+            <div class="compare-col">
+                <div class="compare-head personal">Kaala Personal</div>
+                <div class="compare-rows">
+                    <div class="compare-row">Natal chart dasha timeline (full 120yr)</div>
+                    <div class="compare-row">Live transit overlay and window score</div>
+                    <div class="compare-row">Monthly narrative interpretation</div>
+                    <div class="compare-row">Sade Sati and Guru transit alerts</div>
+                    <div class="compare-row">Pratyantara-level breakdown</div>
+                </div>
+                <div class="compare-price">
+                    <strong>Free early access</strong>
+                    Paid plan from $29/mo · No card now
+                </div>
+            </div>
+            <div class="compare-col">
+                <div class="compare-head enterprise">Kaala Enterprise</div>
+                <div class="compare-rows">
+                    <div class="compare-row">6-nation country window predictions</div>
+                    <div class="compare-row">API access (JSON) with signature detail</div>
+                    <div class="compare-row">Custom chart onboarding (any entity)</div>
+                    <div class="compare-row">Monthly Tempora Research briefings</div>
+                    <div class="compare-row">Dedicated onboarding call</div>
+                </div>
+                <div class="compare-price">
+                    <strong>From $499/mo</strong>
+                    Priority onboarding · Pricing on request
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Kaala is a product of <a href="../">Tempora Research</a> &nbsp;·&nbsp; Not financial advice &nbsp;·&nbsp; &copy; 2026 Tempora</p>
+    </footer>
+
+    <script>
+        function switchTier(tier, el) {
+            document.querySelectorAll('.tier-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tier-content').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('tier-' + tier).classList.add('active');
+        }
+    </script>
+</body>
+</html>
