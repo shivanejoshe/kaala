@@ -6,7 +6,18 @@
   <title>Research — Kaala by Tempora</title>
   <meta name="description" content="Research from Tempora — peer-reviewed synthesis and original analysis on temporal patterns in business, health, markets, and human systems.">
   <link rel="canonical" href="https://kaala.tempora.ltd/research">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Cpath d='M 5 16 Q 16 10 27 16' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='16' y1='5' x2='16' y2='27' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='13.5' r='2' fill='%232C4A6E'/%3E%3C/svg%3E">
   <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f7;
+      --border: #e8e8e8;
+      --text: #0a0a0a;
+      --muted: #888888;
+      --light: #cccccc;
+      --signal: #2C4A6E;
+      --paper: #F8F7F2;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Futura','Futura PT','Century Gothic',sans-serif; background: #fff; color: #0a0a0a; line-height: 1.6; -webkit-font-smoothing: antialiased; }
     a { color: #0a0a0a; text-decoration: none; }
@@ -27,7 +38,7 @@
     /* Filter bar */
     .filters { max-width: 1080px; margin: 0 auto; padding: 32px 40px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid #e8e8e8; }
     .filter { padding: 7px 18px; border: 1px solid #e8e8e8; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #888; cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
-    .filter.active, .filter:hover { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+    .filter.active, .filter:hover { background: var(--signal); color: #fff; border-color: var(--signal); }
 
     /* Article grid */
     .articles { max-width: 1080px; margin: 0 auto; padding: 0 40px 100px; }
@@ -47,8 +58,8 @@
 
     .article-right { padding-top: 4px; text-align: right; }
     .article-date { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #ccc; margin-bottom: 12px; }
-    .article-link { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; border-bottom: 1px solid #e8e8e8; padding-bottom: 2px; }
-    .article-link:hover { border-color: #0a0a0a; }
+    .article-link { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; border-bottom: 1px solid #e8e8e8; padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; }
+    .article-link:hover { color: var(--signal); border-color: var(--signal); }
 
     /* Featured article — first one, larger */
     .article-featured { border-bottom: 1px solid #e8e8e8; padding: 48px 0; }
@@ -61,7 +72,7 @@
     .featured-sub { font-size: 15px; color: #666; line-height: 1.75; margin-bottom: 20px; max-width: 520px; }
     .featured-meta { font-size: 11px; color: #aaa; letter-spacing: 1px; }
     .featured-stat { text-align: right; }
-    .featured-stat-num { font-size: 48px; font-weight: 700; color: #0a0a0a; letter-spacing: -2px; line-height: 1; margin-bottom: 4px; }
+    .featured-stat-num { font-size: 48px; font-weight: 700; color: var(--signal); letter-spacing: -2px; line-height: 1; margin-bottom: 4px; }
     .featured-stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #aaa; margin-bottom: 28px; }
     .featured-stat-num2 { font-size: 32px; font-weight: 700; color: #0a0a0a; letter-spacing: -1px; line-height: 1; margin-bottom: 4px; margin-top: 20px; }
 
