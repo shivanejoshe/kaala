@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research — Kaala by Tempora</title>
+  <meta name="description" content="Research from Tempora — peer-reviewed synthesis and original analysis on temporal patterns in business, health, markets, and human systems.">
+  <link rel="canonical" href="https://kaala.tempora.ltd/research">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Futura','Futura PT','Century Gothic',sans-serif; background: #fff; color: #0a0a0a; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: #0a0a0a; text-decoration: none; }
+
+    nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); z-index: 100; border-bottom: 1px solid #e8e8e8; }
+    .nav-inner { max-width: 1080px; margin: 0 auto; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 13px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; }
+    .nav-right { display: flex; gap: 32px; align-items: center; }
+    .nav-link { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #888; }
+    .nav-link:hover { color: #0a0a0a; }
+    .nav-cta { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; border-bottom: 1px solid #0a0a0a; padding-bottom: 1px; }
+
+    .hero { max-width: 1080px; margin: 0 auto; padding: 120px 40px 64px; border-bottom: 1px solid #e8e8e8; }
+    .eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #aaa; margin-bottom: 20px; }
+    h1 { font-size: 44px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 16px; }
+    .hero-sub { font-size: 16px; color: #888; line-height: 1.7; max-width: 560px; }
+
+    /* Filter bar */
+    .filters { max-width: 1080px; margin: 0 auto; padding: 32px 40px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid #e8e8e8; }
+    .filter { padding: 7px 18px; border: 1px solid #e8e8e8; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #888; cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
+    .filter.active, .filter:hover { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
+
+    /* Article grid */
+    .articles { max-width: 1080px; margin: 0 auto; padding: 0 40px 100px; }
+
+    .article-row { display: grid; grid-template-columns: 80px 1fr 180px; gap: 0; border-bottom: 1px solid #e8e8e8; padding: 40px 0; transition: background 0.1s; }
+    .article-row:hover { background: #fafafa; margin: 0 -40px; padding: 40px; }
+    .article-row:first-child { border-top: none; }
+
+    .article-num { font-size: 10px; letter-spacing: 2px; color: #ccc; padding-top: 4px; }
+    .article-body { padding: 0 40px 0 0; }
+    .article-tag { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #888; background: #f5f5f7; padding: 4px 10px; margin-bottom: 14px; }
+    .article-title { font-size: 22px; font-weight: 700; color: #0a0a0a; letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 10px; }
+    .article-title a { color: inherit; }
+    .article-title a:hover { opacity: 0.7; }
+    .article-sub { font-size: 14px; color: #888; line-height: 1.65; margin-bottom: 16px; max-width: 560px; }
+    .article-meta { font-size: 11px; color: #ccc; letter-spacing: 1px; }
+
+    .article-right { padding-top: 4px; text-align: right; }
+    .article-date { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #ccc; margin-bottom: 12px; }
+    .article-link { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; border-bottom: 1px solid #e8e8e8; padding-bottom: 2px; }
+    .article-link:hover { border-color: #0a0a0a; }
+
+    /* Featured article — first one, larger */
+    .article-featured { border-bottom: 1px solid #e8e8e8; padding: 48px 0; }
+    .article-featured:hover { background: #fafafa; margin: 0 -40px; padding: 48px 40px; }
+    .featured-inner { display: grid; grid-template-columns: 1fr 280px; gap: 80px; align-items: start; }
+    .featured-num { font-size: 10px; letter-spacing: 2px; color: #ccc; margin-bottom: 16px; }
+    .featured-title { font-size: 32px; font-weight: 700; color: #0a0a0a; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 14px; }
+    .featured-title a { color: inherit; }
+    .featured-title a:hover { opacity: 0.7; }
+    .featured-sub { font-size: 15px; color: #666; line-height: 1.75; margin-bottom: 20px; max-width: 520px; }
+    .featured-meta { font-size: 11px; color: #aaa; letter-spacing: 1px; }
+    .featured-stat { text-align: right; }
+    .featured-stat-num { font-size: 48px; font-weight: 700; color: #0a0a0a; letter-spacing: -2px; line-height: 1; margin-bottom: 4px; }
+    .featured-stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #aaa; margin-bottom: 28px; }
+    .featured-stat-num2 { font-size: 32px; font-weight: 700; color: #0a0a0a; letter-spacing: -1px; line-height: 1; margin-bottom: 4px; margin-top: 20px; }
+
+    /* Provenance strip */
+    .provenance { background: #f5f5f7; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; }
+    .provenance-inner { max-width: 1080px; margin: 0 auto; padding: 28px 40px; display: flex; justify-content: space-between; align-items: center; }
+    .prov-text { font-size: 13px; color: #888; }
+    .prov-text a { color: #0a0a0a; border-bottom: 1px solid #e8e8e8; }
+    .prov-link { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; }
+
+    footer { border-top: 1px solid #e8e8e8; padding: 32px 40px; max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-brand { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; }
+
+    @media (max-width: 760px) {
+      h1 { font-size: 30px; }
+      .article-row { grid-template-columns: 1fr; gap: 8px; }
+      .article-num { display: none; }
+      .article-right { text-align: left; }
+      .featured-inner { grid-template-columns: 1fr; gap: 24px; }
+      .featured-stat { text-align: left; }
+      .nav-inner, .hero, .articles, .filters, footer { padding-left: 24px; padding-right: 24px; }
+      .provenance-inner { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">KAALA</a>
+    <div class="nav-right">
+      <a class="nav-link" href="https://tempora.ltd">Tempora Research</a>
+      <a class="nav-cta" href="https://kaala.tempora.ltd">Get your reading →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="eyebrow">Tempora Research · Published on Kaala</p>
+  <h1>The research behind the reading.</h1>
+  <p class="hero-sub">Original analysis and peer-reviewed synthesis on temporal patterns across business, health, markets, and human systems. All findings are public, dated, and falsifiable.</p>
+</div>
+
+<!-- Filter bar -->
+<div class="filters">
+  <button class="filter active" onclick="filterArticles('all', this)">All</button>
+  <button class="filter" onclick="filterArticles('business', this)">Business</button>
+  <button class="filter" onclick="filterArticles('health', this)">Health</button>
+  <button class="filter" onclick="filterArticles('markets', this)">Markets</button>
+  <button class="filter" onclick="filterArticles('geopolitics', this)">Geopolitics</button>
+</div>
+
+<!-- Articles -->
+<div class="articles" id="article-list">
+
+  <!-- 010 — Featured -->
+  <div class="article-featured" data-tag="business">
+    <p class="featured-num">010 · Business · April 2026</p>
+    <div class="featured-inner">
+      <div>
+        <p class="article-tag">Business · M&amp;A Timing</p>
+        <h2 class="featured-title"><a href="https://tempora.ltd/article_010_business_mercury">Mercury Cycles and the Timing of High-Stakes Business Decisions</a></h2>
+        <p class="featured-sub">A 15-year analysis of 4,212 M&A transactions mapped against Mercury's synodic position. Retrograde-announced deals renegotiate at 2.3× the rate. Price revisions run 14.2% deeper. Litigation is 3.1× more prevalent. The signal is consistent across deal size and sector.</p>
+        <p class="featured-meta">Dataset: Bloomberg, Refinitiv, EDGAR · 4,212 transactions · 2010–2025</p>
+        <div style="margin-top: 20px;">
+          <a class="article-link" href="https://tempora.ltd/article_010_business_mercury">Read full research note →</a>
+        </div>
+      </div>
+      <div class="featured-stat">
+        <div class="featured-stat-num">2.3×</div>
+        <div class="featured-stat-label">Renegotiation rate<br>retrograde vs direct</div>
+        <div class="featured-stat-num2">3.1×</div>
+        <div class="featured-stat-label" style="margin-top:4px;">Litigation elevation<br>within 18 months</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 011 -->
+  <div class="article-row" data-tag="health">
+    <div class="article-num">011</div>
+    <div class="article-body">
+      <p class="article-tag">Health · Chronobiology</p>
+      <h2 class="article-title"><a href="https://tempora.ltd/article_011_health_lunar">Lunar and Solar Cycles in Human Health: What 40 Years of Clinical Research Actually Shows</a></h2>
+      <p class="article-sub">A synthesis of 40+ peer-reviewed studies on cardiac events, surgical outcomes, hospital admissions, and sleep architecture. The cardiac signal — confirmed across five independent datasets — is now guiding surgical scheduling at European cardiac centers.</p>
+      <p class="article-meta">Literature scope: 1983–2025 · Primary journals: JACC, Lancet, NEJM, Chronobiology International, BMJ</p>
+    </div>
+    <div class="article-right">
+      <div class="article-date">April 2026</div>
+      <a class="article-link" href="https://tempora.ltd/article_011_health_lunar">Read →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Provenance strip -->
+<div class="provenance">
+  <div class="provenance-inner">
+    <p class="prov-text">All research is published in full at <a href="https://tempora.ltd">tempora.ltd</a>. Datasets, methodology, and historical backtests available in the full research notes.</p>
+    <a class="prov-link" href="https://tempora.ltd">All research notes →</a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-brand">Kaala · Tempora Research Pvt. Ltd.</span>
+  <a class="footer-brand" href="https://tempora.ltd">tempora.ltd</a>
+</footer>
+
+<script>
+  function filterArticles(tag, btn) {
+    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'))
+    btn.classList.add('active')
+    document.querySelectorAll('[data-tag]').forEach(el => {
+      el.style.display = (tag === 'all' || el.dataset.tag === tag) ? '' : 'none'
+    })
+  }
+</script>
+
+</body>
+</html>
