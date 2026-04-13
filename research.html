@@ -19,81 +19,105 @@
       --paper: #F8F7F2;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Futura','Futura PT','Century Gothic',sans-serif; background: #fff; color: #0a0a0a; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    a { color: #0a0a0a; text-decoration: none; }
+    body { font-family: 'Futura','Futura PT','Century Gothic',sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--text); text-decoration: none; }
 
-    nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); z-index: 100; border-bottom: 1px solid #e8e8e8; }
+    nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); z-index: 100; border-bottom: 1px solid var(--border); }
     .nav-inner { max-width: 1080px; margin: 0 auto; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 13px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; }
     .nav-right { display: flex; gap: 32px; align-items: center; }
-    .nav-link { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #888; }
-    .nav-link:hover { color: #0a0a0a; }
-    .nav-cta { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; border-bottom: 1px solid #0a0a0a; padding-bottom: 1px; }
+    .nav-link { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .nav-link:hover { color: var(--text); }
+    .nav-cta { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); border-bottom: 1px solid var(--text); padding-bottom: 1px; }
 
-    .hero { max-width: 1080px; margin: 0 auto; padding: 120px 40px 64px; border-bottom: 1px solid #e8e8e8; }
-    .eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #aaa; margin-bottom: 20px; }
+    .hero { max-width: 1080px; margin: 0 auto; padding: 120px 40px 64px; border-bottom: 1px solid var(--border); }
+    .eyebrow { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--light); margin-bottom: 20px; }
     h1 { font-size: 44px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 16px; }
-    .hero-sub { font-size: 16px; color: #888; line-height: 1.7; max-width: 560px; }
+    .hero-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 560px; }
+
+    /* Section divider */
+    .section-label { max-width: 1080px; margin: 0 auto; padding: 48px 40px 0; }
+    .section-label-inner { display: flex; align-items: center; gap: 24px; padding-bottom: 0; }
+    .section-label-text { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--light); white-space: nowrap; }
+    .section-label-rule { flex: 1; height: 1px; background: var(--border); }
 
     /* Filter bar */
-    .filters { max-width: 1080px; margin: 0 auto; padding: 32px 40px; display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid #e8e8e8; }
-    .filter { padding: 7px 18px; border: 1px solid #e8e8e8; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #888; cursor: pointer; background: #fff; font-family: inherit; transition: all 0.15s; }
+    .filters { max-width: 1080px; margin: 0 auto; padding: 24px 40px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter { padding: 7px 18px; border: 1px solid var(--border); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); cursor: pointer; background: var(--bg); font-family: inherit; transition: all 0.15s; }
     .filter.active, .filter:hover { background: var(--signal); color: #fff; border-color: var(--signal); }
+    .filter-divider { width: 1px; height: 30px; background: var(--border); align-self: center; }
 
     /* Article grid */
-    .articles { max-width: 1080px; margin: 0 auto; padding: 0 40px 100px; }
+    .articles { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
 
-    .article-row { display: grid; grid-template-columns: 80px 1fr 180px; gap: 0; border-bottom: 1px solid #e8e8e8; padding: 40px 0; transition: background 0.1s; }
-    .article-row:hover { background: #fafafa; margin: 0 -40px; padding: 40px; }
-    .article-row:first-child { border-top: none; }
+    .article-row { display: grid; grid-template-columns: 80px 1fr 180px; gap: 0; border-bottom: 1px solid var(--border); padding: 40px 0; transition: background 0.1s; }
+    .article-row:hover { background: var(--surface); margin: 0 -40px; padding: 40px; }
 
-    .article-num { font-size: 10px; letter-spacing: 2px; color: #ccc; padding-top: 4px; }
+    .article-num { font-size: 9px; letter-spacing: 3px; color: var(--light); padding-top: 4px; text-transform: uppercase; }
     .article-body { padding: 0 40px 0 0; }
-    .article-tag { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #888; background: #f5f5f7; padding: 4px 10px; margin-bottom: 14px; }
-    .article-title { font-size: 22px; font-weight: 700; color: #0a0a0a; letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 10px; }
-    .article-title a { color: inherit; }
-    .article-title a:hover { opacity: 0.7; }
-    .article-sub { font-size: 14px; color: #888; line-height: 1.65; margin-bottom: 16px; max-width: 560px; }
-    .article-meta { font-size: 11px; color: #ccc; letter-spacing: 1px; }
+    .article-tag { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); background: var(--surface); padding: 4px 10px; margin-bottom: 14px; }
+    .article-title { font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 10px; }
+    .article-title a { color: inherit; transition: opacity 0.15s; }
+    .article-title a:hover { opacity: 0.6; }
+    .article-sub { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; max-width: 560px; }
+    .article-meta { font-size: 11px; color: var(--light); letter-spacing: 1px; }
 
     .article-right { padding-top: 4px; text-align: right; }
-    .article-date { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #ccc; margin-bottom: 12px; }
-    .article-link { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #0a0a0a; border-bottom: 1px solid #e8e8e8; padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; }
+    .article-date { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--light); margin-bottom: 12px; }
+    .article-link { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; }
     .article-link:hover { color: var(--signal); border-color: var(--signal); }
 
-    /* Featured article — first one, larger */
-    .article-featured { border-bottom: 1px solid #e8e8e8; padding: 48px 0; }
-    .article-featured:hover { background: #fafafa; margin: 0 -40px; padding: 48px 40px; }
-    .featured-inner { display: grid; grid-template-columns: 1fr 280px; gap: 80px; align-items: start; }
-    .featured-num { font-size: 10px; letter-spacing: 2px; color: #ccc; margin-bottom: 16px; }
-    .featured-title { font-size: 32px; font-weight: 700; color: #0a0a0a; letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 14px; }
-    .featured-title a { color: inherit; }
-    .featured-title a:hover { opacity: 0.7; }
-    .featured-sub { font-size: 15px; color: #666; line-height: 1.75; margin-bottom: 20px; max-width: 520px; }
-    .featured-meta { font-size: 11px; color: #aaa; letter-spacing: 1px; }
+    /* Featured article */
+    .article-featured { border-bottom: 1px solid var(--border); padding: 48px 0; }
+    .article-featured:hover { background: var(--surface); margin: 0 -40px; padding: 48px 40px; }
+    .featured-inner { display: grid; grid-template-columns: 1fr 240px; gap: 80px; align-items: start; }
+    .featured-num { font-size: 9px; letter-spacing: 3px; color: var(--light); margin-bottom: 16px; text-transform: uppercase; }
+    .featured-title { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; line-height: 1.1; margin-bottom: 14px; }
+    .featured-title a { color: inherit; transition: opacity 0.15s; }
+    .featured-title a:hover { opacity: 0.6; }
+    .featured-sub { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; max-width: 520px; }
+    .featured-meta { font-size: 11px; color: var(--light); letter-spacing: 1px; }
     .featured-stat { text-align: right; }
     .featured-stat-num { font-size: 48px; font-weight: 700; color: var(--signal); letter-spacing: -2px; line-height: 1; margin-bottom: 4px; }
-    .featured-stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #aaa; margin-bottom: 28px; }
-    .featured-stat-num2 { font-size: 32px; font-weight: 700; color: #0a0a0a; letter-spacing: -1px; line-height: 1; margin-bottom: 4px; margin-top: 20px; }
+    .featured-stat-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--light); margin-bottom: 24px; }
+    .featured-stat-num2 { font-size: 32px; font-weight: 700; color: var(--text); letter-spacing: -1px; line-height: 1; margin-bottom: 4px; margin-top: 20px; }
+
+    /* Research note row — compact, ledger style */
+    .note-row { display: grid; grid-template-columns: 80px 1fr 140px; gap: 0; border-bottom: 1px solid var(--border); padding: 28px 0; transition: background 0.1s; }
+    .note-row:hover { background: var(--surface); margin: 0 -40px; padding: 28px 40px; }
+    .note-num { font-size: 9px; letter-spacing: 3px; color: var(--light); padding-top: 3px; text-transform: uppercase; }
+    .note-body { padding: 0 40px 0 0; }
+    .note-badge { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); background: var(--surface); padding: 3px 8px; margin-bottom: 10px; }
+    .note-title { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.35; margin-bottom: 8px; }
+    .note-title a { color: inherit; transition: opacity 0.15s; }
+    .note-title a:hover { opacity: 0.6; }
+    .note-desc { font-size: 13px; color: var(--muted); line-height: 1.65; max-width: 560px; }
+    .note-stats { display: flex; gap: 20px; margin-top: 10px; }
+    .note-stat-val { font-size: 14px; font-weight: 700; color: var(--text); display: block; }
+    .note-stat-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--light); }
+    .note-right { padding-top: 3px; text-align: right; }
+    .note-link { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; white-space: nowrap; }
+    .note-link:hover { color: var(--signal); border-color: var(--signal); }
 
     /* Provenance strip */
-    .provenance { background: #f5f5f7; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; }
+    .provenance { background: var(--paper); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 80px; }
     .provenance-inner { max-width: 1080px; margin: 0 auto; padding: 28px 40px; display: flex; justify-content: space-between; align-items: center; }
-    .prov-text { font-size: 13px; color: #888; }
-    .prov-text a { color: #0a0a0a; border-bottom: 1px solid #e8e8e8; }
-    .prov-link { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; }
+    .prov-text { font-size: 13px; color: var(--muted); }
+    .prov-text a { color: var(--text); border-bottom: 1px solid var(--border); }
+    .prov-link { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--light); transition: color 0.15s; }
+    .prov-link:hover { color: var(--signal); }
 
-    footer { border-top: 1px solid #e8e8e8; padding: 32px 40px; max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .footer-brand { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; }
+    footer { border-top: 1px solid var(--border); padding: 32px 40px; max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-brand { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--light); }
 
     @media (max-width: 760px) {
       h1 { font-size: 30px; }
-      .article-row { grid-template-columns: 1fr; gap: 8px; }
-      .article-num { display: none; }
-      .article-right { text-align: left; }
+      .article-row, .note-row { grid-template-columns: 1fr; gap: 8px; }
+      .article-num, .note-num { display: none; }
+      .article-right, .note-right { text-align: left; }
       .featured-inner { grid-template-columns: 1fr; gap: 24px; }
       .featured-stat { text-align: left; }
-      .nav-inner, .hero, .articles, .filters, footer { padding-left: 24px; padding-right: 24px; }
+      .nav-inner, .hero, .articles, .filters, .section-label, footer { padding-left: 24px; padding-right: 24px; }
       .provenance-inner { flex-direction: column; gap: 12px; }
     }
   </style>
@@ -102,7 +126,14 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="logo" href="/">KAALA</a>
+    <a class="logo" href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" width="18" height="18" style="flex-shrink:0;">
+        <path d="M 3 16 Q 16 10 29 16" stroke="#0a0a0a" stroke-width="1.25" stroke-linecap="round"/>
+        <line x1="16" y1="4" x2="16" y2="28" stroke="#0a0a0a" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="16" cy="13.5" r="1.5" fill="#2C4A6E"/>
+      </svg>
+      KAALA
+    </a>
     <div class="nav-right">
       <a class="nav-link" href="https://tempora.ltd">Tempora Research</a>
       <a class="nav-cta" href="https://kaala.tempora.ltd">Get your reading →</a>
@@ -116,29 +147,39 @@
   <p class="hero-sub">Original analysis and peer-reviewed synthesis on temporal patterns across business, health, markets, and human systems. All findings are public, dated, and falsifiable.</p>
 </div>
 
-<!-- Filter bar -->
+<!-- Filters -->
 <div class="filters">
-  <button class="filter active" onclick="filterArticles('all', this)">All</button>
-  <button class="filter" onclick="filterArticles('business', this)">Business</button>
-  <button class="filter" onclick="filterArticles('health', this)">Health</button>
-  <button class="filter" onclick="filterArticles('markets', this)">Markets</button>
-  <button class="filter" onclick="filterArticles('geopolitics', this)">Geopolitics</button>
+  <button class="filter active" onclick="filterAll(this)">All</button>
+  <div class="filter-divider"></div>
+  <button class="filter" onclick="filterTag('business', this)">Business</button>
+  <button class="filter" onclick="filterTag('health', this)">Health</button>
+  <button class="filter" onclick="filterTag('markets', this)">Markets</button>
+  <div class="filter-divider"></div>
+  <button class="filter" onclick="filterTag('geopolitics', this)">Geopolitics</button>
+  <button class="filter" onclick="filterTag('methodology', this)">Methodology</button>
 </div>
 
-<!-- Articles -->
+<!-- ── DOMAIN ARTICLES ─────────────────────────────────── -->
+<div class="section-label" id="domain-label">
+  <div class="section-label-inner">
+    <span class="section-label-text">Domain Research</span>
+    <div class="section-label-rule"></div>
+  </div>
+</div>
+
 <div class="articles" id="article-list">
 
   <!-- 010 — Featured -->
-  <div class="article-featured" data-tag="business">
+  <div class="article-featured" data-tag="business" data-section="domain">
     <p class="featured-num">010 · Business · April 2026</p>
     <div class="featured-inner">
       <div>
         <p class="article-tag">Business · M&amp;A Timing</p>
-        <h2 class="featured-title"><a href="https://tempora.ltd/article_010_business_mercury">Mercury Cycles and the Timing of High-Stakes Business Decisions</a></h2>
+        <h2 class="featured-title"><a href="https://tempora.ltd/article_010_business_mercury.html">Mercury Cycles and the Timing of High-Stakes Business Decisions</a></h2>
         <p class="featured-sub">A 15-year analysis of 4,212 M&A transactions mapped against Mercury's synodic position. Retrograde-announced deals renegotiate at 2.3× the rate. Price revisions run 14.2% deeper. Litigation is 3.1× more prevalent. The signal is consistent across deal size and sector.</p>
         <p class="featured-meta">Dataset: Bloomberg, Refinitiv, EDGAR · 4,212 transactions · 2010–2025</p>
         <div style="margin-top: 20px;">
-          <a class="article-link" href="https://tempora.ltd/article_010_business_mercury">Read full research note →</a>
+          <a class="article-link" href="https://tempora.ltd/article_010_business_mercury.html">Read full research note →</a>
         </div>
       </div>
       <div class="featured-stat">
@@ -151,17 +192,199 @@
   </div>
 
   <!-- 011 -->
-  <div class="article-row" data-tag="health">
+  <div class="article-row" data-tag="health" data-section="domain">
     <div class="article-num">011</div>
     <div class="article-body">
       <p class="article-tag">Health · Chronobiology</p>
-      <h2 class="article-title"><a href="https://tempora.ltd/article_011_health_lunar">Lunar and Solar Cycles in Human Health: What 40 Years of Clinical Research Actually Shows</a></h2>
+      <h2 class="article-title"><a href="https://tempora.ltd/article_011_health_lunar.html">Lunar and Solar Cycles in Human Health: What 40 Years of Clinical Research Actually Shows</a></h2>
       <p class="article-sub">A synthesis of 40+ peer-reviewed studies on cardiac events, surgical outcomes, hospital admissions, and sleep architecture. The cardiac signal — confirmed across five independent datasets — is now guiding surgical scheduling at European cardiac centers.</p>
       <p class="article-meta">Literature scope: 1983–2025 · Primary journals: JACC, Lancet, NEJM, Chronobiology International, BMJ</p>
     </div>
     <div class="article-right">
       <div class="article-date">April 2026</div>
-      <a class="article-link" href="https://tempora.ltd/article_011_health_lunar">Read →</a>
+      <a class="article-link" href="https://tempora.ltd/article_011_health_lunar.html">Read →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── RESEARCH NOTES ──────────────────────────────────── -->
+<div class="section-label" id="notes-label" style="padding-top: 64px;">
+  <div class="section-label-inner">
+    <span class="section-label-text">Research Notes — Tempora.ltd</span>
+    <div class="section-label-rule"></div>
+  </div>
+</div>
+
+<div class="articles" id="notes-list" style="padding-bottom: 0;">
+
+  <!-- 009 -->
+  <div class="note-row" data-tag="geopolitics" data-section="notes">
+    <div class="note-num">009</div>
+    <div class="note-body">
+      <span class="note-badge">Geopolitics · South Asia</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_009_SubcontinentTriangle.html">The Subcontinent Triangle: India, China &amp; Pakistan</a></h3>
+      <p class="note-desc">Three calibrated charts. Stability corridor (2026), fighting window (Dec 2027), and the Feb–Aug 2028 destruction window — the only period where all three nuclear-armed charts are simultaneously elevated.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">Feb–Aug 2028</span><span class="note-stat-label">Peak Window</span></div>
+        <div><span class="note-stat-val">3</span><span class="note-stat-label">Calibrated Charts</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">April 2026</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_009_SubcontinentTriangle.html">Read →</a>
+    </div>
+  </div>
+
+  <!-- 008 -->
+  <div class="note-row" data-tag="geopolitics" data-section="notes">
+    <div class="note-num">008</div>
+    <div class="note-body">
+      <span class="note-badge">Geopolitics · Middle East</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_008_MiddleEast.html">The Middle East Triangle: Israel, Iran &amp; the United States</a></h3>
+      <p class="note-desc">Three-chart convergence analysis. Q4 2026–Q2 2027 as peak direct confrontation window. The 2029 US distraction period and what it enables. Nuclear timeline intersection mapped.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">Q4 2026</span><span class="note-stat-label">Peak Risk</span></div>
+        <div><span class="note-stat-val">3</span><span class="note-stat-label">Charts</span></div>
+        <div><span class="note-stat-val">8</span><span class="note-stat-label">Predictions</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">March 2026</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_008_MiddleEast.html">Read →</a>
+    </div>
+  </div>
+
+  <!-- 007 -->
+  <div class="note-row" data-tag="geopolitics" data-section="notes">
+    <div class="note-num">007</div>
+    <div class="note-body">
+      <span class="note-badge">Geopolitics · East Asia</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_007_ChinaTaiwan.html">The Taiwan Strait: Temporal Risk Windows 2026–2030</a></h3>
+      <p class="note-desc">Cross-chart convergence of China and Taiwan. Q2–Q3 2027 identified as the highest miscalculation risk window since 1996. Stability corridor, pressure buildup, and diplomatic engagement windows mapped.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">Q2–Q3 2027</span><span class="note-stat-label">Peak Risk</span></div>
+        <div><span class="note-stat-val">2</span><span class="note-stat-label">Charts</span></div>
+        <div><span class="note-stat-val">8</span><span class="note-stat-label">Predictions</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">March 2026</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_007_ChinaTaiwan.html">Read →</a>
+    </div>
+  </div>
+
+  <!-- 006 -->
+  <div class="note-row" data-tag="geopolitics" data-section="notes">
+    <div class="note-num">006</div>
+    <div class="note-body">
+      <span class="note-badge">Forward Predictions</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_006_Predictions.html">Temporal Windows 2026–2030: Validated Forward Predictions</a></h3>
+      <p class="note-desc">Calibrated engine applied forward. India December 2027, Russia February 2028, US late 2029. All 12 predictions falsifiable, publicly scored. The global Saturn convergence explained.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">12</span><span class="note-stat-label">Open Windows</span></div>
+        <div><span class="note-stat-val">5yr</span><span class="note-stat-label">Horizon</span></div>
+        <div><span class="note-stat-val">6</span><span class="note-stat-label">Nations</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">Feb 2026</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_006_Predictions.html">Read →</a>
+    </div>
+  </div>
+
+  <!-- 005 -->
+  <div class="note-row" data-tag="methodology" data-section="notes">
+    <div class="note-num">005</div>
+    <div class="note-body">
+      <span class="note-badge">Methodology</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_005_Calibration.html">Calibrating the Signal: How We Derive the Weights</a></h3>
+      <p class="note-desc">Generic scoring produces sub-1× lift — noise. Per-entity calibration from 300+ historical data points using Monte Carlo simulation. The complete methodology, published in full.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">5.46×</span><span class="note-stat-label">Peak Lift</span></div>
+        <div><span class="note-stat-val">300+</span><span class="note-stat-label">Data Points</span></div>
+        <div><span class="note-stat-val">1,800</span><span class="note-stat-label">Monte Carlo</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">Jan 2026</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_005_Calibration.html">Read →</a>
+    </div>
+  </div>
+
+  <!-- 004 -->
+  <div class="note-row" data-tag="geopolitics" data-section="notes">
+    <div class="note-num">004</div>
+    <div class="note-body">
+      <span class="note-badge">Geopolitics · Global</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_004_Geopolitical.pdf">The Geopolitical Clock: Six Nations, 2025–2030</a></h3>
+      <p class="note-desc">92 historical events across 6 countries backtested. 15 specific, falsifiable forward predictions. The 2028–2029 global Saturn convergence and what historical analogues suggest it means.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">24%</span><span class="note-stat-label">Exact Match</span></div>
+        <div><span class="note-stat-val">15</span><span class="note-stat-label">Predictions</span></div>
+        <div><span class="note-stat-val">92</span><span class="note-stat-label">Events</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">Dec 2025</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_004_Geopolitical.pdf">PDF →</a>
+    </div>
+  </div>
+
+  <!-- 003 -->
+  <div class="note-row" data-tag="markets" data-section="notes">
+    <div class="note-num">003</div>
+    <div class="note-body">
+      <span class="note-badge">Markets · India</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_003_Nifty.pdf">Indian Markets: 30 Years of Turning Points Mapped</a></h3>
+      <p class="note-desc">Two independent temporal charts overlaid on 30 years of Nifty 50 data. Every major crash and rally identified in hindsight. Sector-level calls for 2026–2028.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">10/10</span><span class="note-stat-label">Matched</span></div>
+        <div><span class="note-stat-val">8</span><span class="note-stat-label">Forward Calls</span></div>
+        <div><span class="note-stat-val">30yr</span><span class="note-stat-label">Dataset</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">Nov 2025</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_003_Nifty.pdf">PDF →</a>
+    </div>
+  </div>
+
+  <!-- 002 -->
+  <div class="note-row" data-tag="geopolitics" data-section="notes">
+    <div class="note-num">002</div>
+    <div class="note-body">
+      <span class="note-badge">Geopolitics · India</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_002_India.pdf">India 2026–2027: 21 Dated, Falsifiable Predictions</a></h3>
+      <p class="note-desc">National founding chart mapped against 78 years of confirmed events. Calibrated and scored. 21 specific predictions across 6 categories — all public, all auditable before the window opens.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">21</span><span class="note-stat-label">Predictions</span></div>
+        <div><span class="note-stat-val">6</span><span class="note-stat-label">Categories</span></div>
+        <div><span class="note-stat-val">78yr</span><span class="note-stat-label">Validated</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">Oct 2025</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_002_India.pdf">PDF →</a>
+    </div>
+  </div>
+
+  <!-- 001 -->
+  <div class="note-row" data-tag="methodology" data-section="notes">
+    <div class="note-num">001</div>
+    <div class="note-body">
+      <span class="note-badge">Foundation · Introduction</span>
+      <h3 class="note-title"><a href="https://tempora.ltd/Tempora_Research_Note_001_Introduction.html">The Signal: Does Temporal Pattern Analysis Have Predictive Power?</a></h3>
+      <p class="note-desc">The introduction. What was tested, how it was tested, and what survived. Six countries, 39 historical events, 1,800 Monte Carlo baselines. Individual signals reach 5.46× historical lift.</p>
+      <div class="note-stats">
+        <div><span class="note-stat-val">5.46×</span><span class="note-stat-label">Peak Lift</span></div>
+        <div><span class="note-stat-val">39</span><span class="note-stat-label">Events</span></div>
+        <div><span class="note-stat-val">6</span><span class="note-stat-label">Nations</span></div>
+      </div>
+    </div>
+    <div class="note-right">
+      <div class="article-date">Sep 2025</div>
+      <a class="note-link" href="https://tempora.ltd/Tempora_Research_Note_001_Introduction.html">Read →</a>
     </div>
   </div>
 
@@ -181,12 +404,28 @@
 </footer>
 
 <script>
-  function filterArticles(tag, btn) {
+  function filterAll(btn) {
     document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'))
     btn.classList.add('active')
+    document.querySelectorAll('[data-tag]').forEach(el => el.style.display = '')
+    document.getElementById('domain-label').style.display = ''
+    document.getElementById('notes-label').style.display = ''
+  }
+
+  function filterTag(tag, btn) {
+    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'))
+    btn.classList.add('active')
+
+    let hasDomain = false, hasNotes = false
     document.querySelectorAll('[data-tag]').forEach(el => {
-      el.style.display = (tag === 'all' || el.dataset.tag === tag) ? '' : 'none'
+      const show = el.dataset.tag === tag
+      el.style.display = show ? '' : 'none'
+      if (show && el.dataset.section === 'domain') hasDomain = true
+      if (show && el.dataset.section === 'notes') hasNotes = true
     })
+
+    document.getElementById('domain-label').style.display = hasDomain ? '' : 'none'
+    document.getElementById('notes-label').style.display = hasNotes ? '' : 'none'
   }
 </script>
 
