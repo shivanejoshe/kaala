@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaala — Temporal Intelligence</title>
-    <meta name="description" content="Kaala maps your life and the world to time. Dasha timelines, transit signals, validated event windows — for individuals and institutions.">
+    <title>Kaala — Know When to Move</title>
+    <meta name="description" content="Kaala maps your life to time. Dasha timelines, transit signals, and validated event windows — so you stop guessing and start knowing when conditions are with you.">
+    <meta property="og:title" content="Kaala — Know When to Move">
+    <meta property="og:description" content="Built on Tempora Research. 300+ historical data points. 5.46× validated lift. Your temporal intelligence engine.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Cpath d='M 5 16 Q 16 10 27 16' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='16' y1='5' x2='16' y2='27' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='13.5' r='2' fill='%232C4A6E'/%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -18,371 +19,496 @@
             --light: #cccccc;
             --signal: #2C4A6E;
             --paper: #F8F7F2;
-            --accent: #0a0a0a;
-            --accent2: #0a0a0a;
-            --white: #0a0a0a;
         }
         body { font-family: 'Futura','Futura PT','Century Gothic',sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-        a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
-        a:hover { opacity: 0.8; }
-        ::selection { background: var(--accent); color: var(--bg); }
+        a { color: inherit; text-decoration: none; }
 
-        nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 100; border-bottom: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-        .nav-inner { max-width: 1080px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: 3px; text-transform: uppercase; }
-        .logo span { color: var(--accent); }
-        .nav-byline { font-size: 12px; color: var(--muted); }
-        .nav-byline a { color: var(--accent2); opacity: 0.8; }
-        .nav-byline a:hover { opacity: 1; }
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 100; border-bottom: 1px solid var(--border);
+            height: 56px;
+        }
+        .nav-inner { max-width: 1080px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 4px; font-weight: 700; text-transform: uppercase; color: var(--text); }
+        .nav-links { display: flex; align-items: center; gap: 28px; }
+        .nav-links a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a.nav-try { color: var(--signal); border-bottom: 1px solid var(--signal); padding-bottom: 1px; }
 
-        /* Hero */
-        .hero { padding: 160px 24px 100px; text-align: center; position: relative; overflow: hidden; }
-        .hero-glow { display: none; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; padding: 8px 20px; border: 1px solid var(--border); }
-        .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--signal); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
-        .hero h1 { font-size: 60px; font-weight: 700; color: var(--white); margin-bottom: 24px; line-height: 1.05; letter-spacing: -1px; text-transform: uppercase; }
-        .hero h1 strong { font-weight: 700; color: var(--white); }
-        .hero-sub { font-size: 17px; color: var(--muted); max-width: 540px; margin: 0 auto 16px; line-height: 1.7; }
-        .hero-proof { font-size: 13px; color: var(--muted); margin-bottom: 56px; }
-        .hero-proof a { color: var(--accent2); }
+        /* HERO */
+        .hero {
+            padding: 140px 40px 100px;
+            max-width: 1080px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center;
+        }
+        .hero-eyebrow { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--light); margin-bottom: 32px; display: flex; align-items: center; gap: 10px; }
+        .hero-dot { width: 6px; height: 6px; background: var(--signal); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+        .hero h1 { font-size: clamp(36px, 4.5vw, 54px); line-height: 1.05; letter-spacing: -1px; color: var(--text); margin-bottom: 24px; }
+        .hero h1 .h-light { font-weight: 300; }
+        .hero h1 .h-heavy { font-weight: 700; display: block; }
+        .hero-sub { font-size: 15px; color: var(--muted); line-height: 1.85; max-width: 400px; margin-bottom: 36px; }
+        .hero-cta { display: flex; align-items: center; gap: 20px; }
+        .btn-primary { display: inline-block; background: var(--signal); color: #fff; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; padding: 13px 28px; font-family: inherit; font-weight: 700; cursor: pointer; transition: background 0.2s; border: none; }
+        .btn-primary:hover { background: #3d6494; }
+        .hero-note { font-size: 11px; color: var(--light); }
 
-        /* CTA block */
-        .cta-block { max-width: 680px; margin: 0 auto; }
-        .tier-tabs { display: flex; gap: 1px; background: var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
-        .tier-tab { flex: 1; text-align: center; padding: 12px; font-size: 13px; font-weight: 500; cursor: pointer; background: var(--surface); color: var(--muted); transition: all 0.2s; border: none; font-family: inherit; }
-        .tier-tab.active { background: var(--accent); color: #ffffff; }
-        .tier-content { display: none; }
-        .tier-content.active { display: block; }
-        .tier-form { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; text-align: left; }
-        .tier-form-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 500; margin-bottom: 8px; }
-        .tier-form h3 { font-size: 20px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
-        .tier-form p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
-        .form-row { display: flex; gap: 8px; }
-        .form-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 14px; color: var(--white); font-family: inherit; outline: none; transition: border-color 0.2s; }
-        .form-input:focus { border-color: var(--accent); }
-        .form-input::placeholder { color: var(--muted); }
-        .form-btn { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity 0.2s, transform 0.1s; white-space: nowrap; }
-        .form-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .form-note { font-size: 11px; color: var(--muted); margin-top: 12px; }
-        .tier-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
-        .tier-feature { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-        .tier-feature::before { content: '✓'; color: var(--accent2); font-weight: 600; flex-shrink: 0; }
+        /* TIMELINE VISUAL */
+        .timeline-visual { background: var(--surface); border: 1px solid var(--border); padding: 32px; }
+        .tv-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--light); margin-bottom: 24px; }
+        .tv-track { position: relative; margin-bottom: 20px; }
+        .tv-track-line { height: 1px; background: var(--border); position: relative; margin: 0 0 8px; }
+        .tv-tick {
+            position: absolute; top: -4px;
+            width: 9px; height: 9px; border-radius: 50%;
+            border: 1.5px solid var(--border); background: var(--bg);
+        }
+        .tv-tick.active { background: var(--signal); border-color: var(--signal); }
+        .tv-tick.elevated { background: #d4a96a; border-color: #d4a96a; }
+        .tv-period { font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; }
+        .tv-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .tv-row:last-child { border-bottom: none; }
+        .tv-row-label { font-size: 12px; color: var(--text); }
+        .tv-row-score { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        .tv-row-score.high { color: var(--signal); }
+        .tv-row-score.neutral { color: var(--light); }
+        .tv-row-score.elevated { color: #d4a96a; }
+        .tv-score-bar { height: 2px; background: var(--border); margin: 8px 0 0; position: relative; }
+        .tv-score-fill { height: 100%; background: var(--signal); transition: width 1s ease; }
 
-        /* Signal preview */
-        .signals { max-width: 1080px; margin: 100px auto; padding: 0 24px; }
-        .signals-label { font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; text-align: center; }
-        .signals-title { font-size: 36px; font-weight: 700; color: var(--white); text-align: center; margin-bottom: 8px; letter-spacing: -0.5px; text-transform: uppercase; }
-        .signals-desc { font-size: 15px; color: var(--muted); text-align: center; margin-bottom: 56px; }
-        .signal-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 16px; overflow: hidden; }
-        .signal-card { background: var(--surface); padding: 36px 28px; }
-        .signal-flag { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; padding: 4px 10px; border-radius: 6px; margin-bottom: 20px; font-weight: 500; }
-        .flag-warning { background: #f5f5f5; color: #0a0a0a; border: 1px solid #e0e0e0; }
+        /* SAMPLE READING */
+        .sample-section { background: var(--paper); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .sample-inner { max-width: 1080px; margin: 0 auto; padding: 100px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .sample-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--light); margin-bottom: 24px; }
+        .sample-heading { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; color: var(--text); margin-bottom: 16px; }
+        .sample-heading .h-light { font-weight: 300; }
+        .sample-sub { font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 380px; }
+        .sample-card { background: var(--bg); border: 1px solid var(--border); }
+        .sample-card-head { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .sample-card-id { font-size: 12px; color: var(--text); }
+        .sample-card-tag { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+        .sample-card-body { padding: 24px; }
+        .sample-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--surface); }
+        .sample-row:last-of-type { border-bottom: none; }
+        .sample-row-period { }
+        .sample-row-period-main { font-size: 13px; font-weight: 700; color: var(--text); }
+        .sample-row-period-sub { font-size: 11px; color: var(--muted); }
+        .sample-row-signal { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        .sample-row-signal.peak { color: var(--signal); }
+        .sample-row-signal.ok { color: var(--light); }
+        .sample-row-signal.caution { color: #b06020; }
+        .sample-reading-text { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); line-height: 1.85; font-style: italic; }
+        .sample-reading-text strong { color: var(--text); font-style: normal; }
+
+        /* HOW IT WORKS */
+        .how-section { border-top: 1px solid #ebebeb; }
+        .how-inner { max-width: 1080px; margin: 0 auto; padding: 100px 40px; }
+        .how-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--light); margin-bottom: 48px; }
+        .how-heading { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; color: var(--text); margin-bottom: 60px; }
+        .how-heading .h-light { font-weight: 300; }
+        .how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .how-step { background: var(--bg); padding: 40px 32px; }
+        .how-step-num { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--light); margin-bottom: 20px; }
+        .how-step h4 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.2; }
+        .how-step p { font-size: 13px; color: var(--muted); line-height: 1.75; }
+        .how-step code { font-size: 11px; color: var(--signal); background: rgba(44,74,110,0.08); padding: 2px 6px; font-family: 'SF Mono','Fira Code',monospace; }
+
+        /* RESEARCH BACKING */
+        .research-backing { background: var(--text); }
+        .rb-inner { max-width: 1080px; margin: 0 auto; padding: 80px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .rb-heading { font-size: clamp(28px, 3vw, 40px); font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; color: #ffffff; margin-bottom: 16px; }
+        .rb-heading .h-light { font-weight: 300; color: #555; }
+        .rb-sub { font-size: 14px; color: #666; line-height: 1.8; margin-bottom: 28px; }
+        .rb-link { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--signal); border-bottom: 1px solid var(--signal); padding-bottom: 1px; }
+        .rb-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #1a1a1a; border: 1px solid #1a1a1a; }
+        .rb-stat { background: #111; padding: 28px 24px; }
+        .rb-stat-num { font-size: 32px; font-weight: 700; color: var(--signal); letter-spacing: -1px; line-height: 1; margin-bottom: 8px; }
+        .rb-stat-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #555; }
+        .rb-articles { grid-column: 1 / -1; display: flex; gap: 16px; flex-wrap: wrap; }
+        .rb-article-pill { font-size: 10px; letter-spacing: 1px; color: #555; border: 1px solid #1e1e1e; padding: 6px 14px; }
+
+        /* PRICING / FORM */
+        .pricing-section { border-top: 1px solid #ebebeb; }
+        .pricing-inner { max-width: 1080px; margin: 0 auto; padding: 100px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .pricing-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--light); margin-bottom: 24px; }
+        .pricing-heading { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; color: var(--text); margin-bottom: 16px; }
+        .pricing-sub { font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 380px; }
+        .pricing-card { border: 1px solid var(--border); }
+        .pricing-card-head { padding: 28px 32px; border-bottom: 1px solid var(--border); }
+        .pricing-price { font-size: 40px; font-weight: 700; color: var(--text); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+        .pricing-price-note { font-size: 12px; color: var(--muted); }
+        .pricing-includes { padding: 24px 32px; border-bottom: 1px solid var(--border); }
+        .pricing-includes-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--light); margin-bottom: 16px; }
+        .pricing-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--muted); padding: 7px 0; border-bottom: 1px solid var(--surface); }
+        .pricing-feature:last-child { border-bottom: none; }
+        .pricing-feature::before { content: '—'; color: var(--light); flex-shrink: 0; }
+        .pricing-form { padding: 24px 32px; background: var(--paper); }
+        .pricing-form-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--light); margin-bottom: 16px; }
+        .pf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+        .pf-input { background: var(--bg); border: 1px solid var(--border); padding: 10px 14px; font-size: 13px; color: var(--text); font-family: inherit; outline: none; width: 100%; transition: border-color 0.2s; }
+        .pf-input:focus { border-color: var(--signal); }
+        .pf-input::placeholder { color: var(--light); }
+        .pf-submit { width: 100%; background: var(--signal); color: #fff; border: none; padding: 13px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-family: inherit; font-weight: 700; margin-top: 8px; transition: background 0.2s; }
+        .pf-submit:hover { background: #3d6494; }
+        .pf-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+
+        /* FORWARD WINDOWS */
+        .windows-section { border-top: 1px solid #ebebeb; }
+        .windows-inner { max-width: 1080px; margin: 0 auto; padding: 100px 40px; }
+        .windows-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--light); margin-bottom: 12px; }
+        .windows-heading { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; line-height: 1.1; letter-spacing: -0.5px; color: var(--text); margin-bottom: 12px; }
+        .windows-heading .h-light { font-weight: 300; }
+        .windows-sub { font-size: 14px; color: var(--muted); margin-bottom: 56px; }
+        .signal-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .signal-card { background: var(--surface); padding: 32px 28px; }
+        .signal-flag { display: inline-block; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; padding: 4px 10px; margin-bottom: 20px; font-weight: 700; }
+        .flag-warning { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
         .flag-elevated { background: var(--signal); color: #ffffff; border: 1px solid var(--signal); }
-        .flag-watch { background: #f5f5f5; color: #888; border: 1px solid #e0e0e0; }
-        .signal-country { font-size: 12px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; }
-        .signal-card h3 { font-size: 20px; font-weight: 500; color: var(--white); margin-bottom: 12px; line-height: 1.3; }
-        .signal-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+        .flag-watch { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+        .signal-country { font-size: 9px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .signal-card h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
+        .signal-card p { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 20px; }
         .signal-data { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 16px; border-top: 1px solid var(--border); }
         .signal-datum { font-size: 11px; color: var(--muted); }
-        .signal-datum strong { display: block; font-size: 14px; color: var(--white); font-weight: 600; margin-bottom: 2px; }
-        .signal-badge { font-size: 11px; padding: 4px 10px; background: rgba(0,212,170,0.1); color: var(--accent2); border-radius: 6px; border: 1px solid rgba(0,212,170,0.2); display: inline-block; margin-top: 16px; }
+        .signal-datum strong { display: block; font-size: 13px; color: var(--text); font-weight: 700; margin-bottom: 2px; font-family: 'SF Mono','Fira Code',monospace; }
+        .signal-source { font-size: 9px; letter-spacing: 1px; color: var(--light); margin-top: 16px; }
 
-        /* Stack section */
-        .stack { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
-        .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-radius: 16px; overflow: hidden; margin-top: 48px; }
-        .stack-item { background: var(--surface); padding: 32px 28px; }
-        .stack-item-num { font-size: 11px; font-weight: 500; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; }
-        .stack-item h4 { font-size: 17px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
-        .stack-item p { font-size: 13px; color: var(--muted); line-height: 1.7; }
-        .stack-item code { font-size: 11px; color: var(--accent2); background: rgba(0,212,170,0.08); padding: 2px 6px; border-radius: 4px; font-family: 'SF Mono', 'Fira Code', monospace; }
+        /* FOOTER */
+        footer { border-top: 1px solid #ebebeb; padding: 40px; }
+        .footer-inner { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        footer p { font-size: 10px; color: var(--light); }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--light); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--text); }
 
-        /* Comparison */
-        .compare { max-width: 800px; margin: 0 auto; padding: 80px 24px; }
-        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
-        .compare-col { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        .compare-head { padding: 16px 20px; font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
-        .compare-head.personal { background: var(--surface); color: var(--text); border-bottom: 1px solid var(--border); }
-        .compare-head.enterprise { background: var(--text); color: #ffffff; border-bottom: 1px solid var(--text); }
-        .compare-rows { background: var(--bg); }
-        .compare-row { padding: 12px 20px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-        .compare-row:last-child { border-bottom: none; }
-        .compare-row::before { content: '—'; color: var(--light); font-size: 11px; flex-shrink: 0; }
-        .compare-price { padding: 20px; background: var(--paper); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); }
-        .compare-price strong { display: block; font-size: 20px; color: var(--text); font-weight: 700; margin-bottom: 4px; letter-spacing: -0.3px; }
+        /* REVEAL */
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
 
-        /* Research bar */
-        .research-bar { background: var(--paper); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 32px 24px; text-align: center; }
-        .research-bar-inner { max-width: 700px; margin: 0 auto; }
-        .research-bar p { font-size: 14px; color: var(--muted); }
-        .research-bar a { color: var(--accent2); font-weight: 500; }
-        .research-bar strong { color: var(--white); }
-
-        /* Footer */
-        footer { text-align: center; padding: 40px 24px; }
-        footer p { font-size: 12px; color: var(--muted); }
-        footer a { color: var(--muted); }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; letter-spacing: -1px; }
-            .hero-sub { font-size: 15px; }
+        @media (max-width: 860px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .hero { grid-template-columns: 1fr; padding: 120px 24px 80px; gap: 48px; }
+            .sample-inner { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+            .how-steps { grid-template-columns: 1fr; }
+            .rb-inner { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+            .rb-stats { grid-template-columns: repeat(3, 1fr); }
+            .pricing-inner { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+            .pf-row { grid-template-columns: 1fr; }
             .signal-cards { grid-template-columns: 1fr; }
-            .stack-grid { grid-template-columns: 1fr; }
-            .compare-grid { grid-template-columns: 1fr; }
+            .windows-inner { padding: 80px 24px; }
+            footer { padding: 32px 24px; }
+            .how-inner { padding: 80px 24px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAV -->
     <nav>
         <div class="nav-inner">
-            <div class="logo" style="display:flex;align-items:center;gap:10px;">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" width="18" height="18" style="flex-shrink:0;">
-                <path d="M 3 16 Q 16 10 29 16" stroke="#0a0a0a" stroke-width="1.25" stroke-linecap="round"/>
-                <line x1="16" y1="4" x2="16" y2="28" stroke="#0a0a0a" stroke-width="1.25" stroke-linecap="round"/>
-                <circle cx="16" cy="13.5" r="1.5" fill="#2C4A6E"/>
-              </svg>
-              Kaala<span>.</span>
+            <div class="nav-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" width="18" height="18" style="flex-shrink:0;">
+                    <path d="M 3 16 Q 16 10 29 16" stroke="#0a0a0a" stroke-width="1.25" stroke-linecap="round"/>
+                    <line x1="16" y1="4" x2="16" y2="28" stroke="#0a0a0a" stroke-width="1.25" stroke-linecap="round"/>
+                    <circle cx="16" cy="13.5" r="1.5" fill="#2C4A6E"/>
+                </svg>
+                Kaala
             </div>
-            <div class="nav-byline"><a href="market.html" style="color:var(--accent2); margin-right:16px;">Market Signals</a> <a href="research.html" style="color:var(--accent2); margin-right:16px;">Research</a> by <a href="https://tempora.ltd">Tempora Research</a></div>
+            <div class="nav-links">
+                <a href="research.html">Research</a>
+                <a href="https://tempora.ltd">Tempora</a>
+                <a href="#pricing" class="nav-try">Try Kaala →</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- HERO -->
     <div class="hero">
-        <div class="hero-glow"></div>
-        <div class="hero-badge">Early Access</div>
-        <h1>You already know what to do.<br><strong>You just don't know when.</strong></h1>
-        <p class="hero-sub">Kaala maps the structural windows in your life — when conditions favor decisions, when they don't. Not intuition. Pattern calibration against confirmed outcomes.</p>
-        <p class="hero-proof">Built on <a href="https://tempora.ltd">Tempora Research</a> · 300+ historical data points · 5.46× validated lift · All predictions public</p>
-
-        <div class="cta-block">
-            <div class="tier-tabs">
-                <button class="tier-tab active" onclick="switchTier('personal', this)">Personal</button>
-                <button class="tier-tab" onclick="switchTier('enterprise', this)">Enterprise</button>
+        <div>
+            <div class="hero-eyebrow"><span class="hero-dot"></span>Early Access · Personal Readings</div>
+            <h1>
+                <span class="h-light">You already know</span>
+                <span class="h-heavy">what to do.</span>
+                <span class="h-light" style="display:block;font-size:0.85em;">You just don't know when.</span>
+            </h1>
+            <p class="hero-sub">Kaala maps the structural windows in your life — when conditions favor decisions, when they don't. Not intuition. Pattern calibration against confirmed outcomes.</p>
+            <div class="hero-cta">
+                <a href="#pricing" class="btn-primary">Get your reading</a>
+                <span class="hero-note">₹499 · Ships in 48 hours</span>
             </div>
-
-            <div id="tier-personal" class="tier-content active">
-                <div class="tier-form">
-                    <div class="tier-form-label">Kaala Personal</div>
-                    <h3>Your structural windows, mapped.</h3>
-                    <p>Your birth data scored against live planetary positions. Know which weeks are structurally active, what those windows historically correlate with, and what's ahead.</p>
-                    <div class="tier-features">
-                        <div class="tier-feature">Personal temporal cycle timeline — 10-year and 1-year resolution</div>
-                        <div class="tier-feature">Live signal overlay — which windows are open today</div>
-                        <div class="tier-feature">Monthly window score with context and historical pattern</div>
-                        <div class="tier-feature">High-signal period alerts — decisions, transitions, investments</div>
+        </div>
+        <div class="reveal reveal-delay-1">
+            <div class="timeline-visual">
+                <div class="tv-label">Your temporal map — sample</div>
+                <div style="margin-bottom:24px;">
+                    <div class="tv-track-line" style="position:relative; height:1px; background:var(--border); margin-bottom:6px;">
+                        <span class="tv-tick" style="left:0%"></span>
+                        <span class="tv-tick" style="left:28%"></span>
+                        <span class="tv-tick active" style="left:52%"></span>
+                        <span class="tv-tick elevated" style="left:67%"></span>
+                        <span class="tv-tick" style="left:100%; margin-left:-9px;"></span>
                     </div>
-                    <form action="https://formspree.io/f/xgopozlo" method="POST">
-                        <input type="hidden" name="tier" value="personal">
-                        <input type="hidden" name="_subject" value="Kaala Personal Waitlist">
-                        <div class="form-row">
-                            <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
-                            <button type="submit" class="form-btn">Join waitlist</button>
-                        </div>
-                    </form>
-                    <div class="form-note">Free early access · No credit card · Ships Q3 2026</div>
+                    <div class="tv-period"><span>2022</span><span style="color:var(--signal);font-weight:700;">Now</span><span>2028</span></div>
+                </div>
+                <div class="tv-row">
+                    <span class="tv-row-label">Rahu Mahadasha</span>
+                    <span class="tv-row-score neutral">2022 – 2040</span>
+                </div>
+                <div class="tv-row">
+                    <span class="tv-row-label">Jupiter Antardasha</span>
+                    <span class="tv-row-score high">Oct 2025 – Feb 2028</span>
+                </div>
+                <div class="tv-row">
+                    <span class="tv-row-label">Current window</span>
+                    <span class="tv-row-score elevated">3 signals active</span>
+                </div>
+                <div style="margin-top:20px;">
+                    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--light);margin-bottom:8px;">Confluence score</div>
+                    <div class="tv-score-bar"><div class="tv-score-fill" style="width:78%"></div></div>
+                    <div style="font-size:11px;color:var(--signal);margin-top:6px;font-weight:700;">78 / 100 · Elevated</div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div id="tier-enterprise" class="tier-content">
-                <div class="tier-form">
-                    <div class="tier-form-label">Kaala Enterprise</div>
-                    <h3>Temporal risk signals for institutions</h3>
-                    <p>Country-level event windows, validated signatures, API access, and custom chart analysis for fund managers, geopolitical analysts, and research teams.</p>
-                    <div class="tier-features">
-                        <div class="tier-feature">6-nation prediction windows with confluence scores</div>
-                        <div class="tier-feature">API access to scoring engine (JSON responses)</div>
-                        <div class="tier-feature">Custom national or corporate founding chart analysis</div>
-                        <div class="tier-feature">Monthly research briefings from Tempora team</div>
+    <!-- SAMPLE READING -->
+    <div class="sample-section">
+        <div class="sample-inner">
+            <div>
+                <div class="sample-label">What a reading looks like</div>
+                <h2 class="sample-heading">
+                    <span class="h-light">Not a prediction.</span><br>
+                    A structural map.
+                </h2>
+                <p class="sample-sub">Each reading shows your dasha timeline at 3-level resolution, which windows are structurally active right now, and what those windows historically correlate with — derived from 300+ calibrated events, not interpretation.</p>
+            </div>
+            <div>
+                <div class="sample-card reveal reveal-delay-1">
+                    <div class="sample-card-head">
+                        <span class="sample-card-id">[Name redacted] · 34 · Mumbai · Entrepreneur</span>
+                        <span class="sample-card-tag">Anonymized sample</span>
                     </div>
-                    <form action="https://formspree.io/f/xgopozlo" method="POST">
-                        <input type="hidden" name="tier" value="enterprise">
-                        <input type="hidden" name="_subject" value="Kaala Enterprise Application">
-                        <div class="form-row">
-                            <input type="email" name="email" class="form-input" placeholder="you@institution.com" required>
-                            <button type="submit" class="form-btn">Apply →</button>
+                    <div class="sample-card-body">
+                        <div class="sample-row">
+                            <div class="sample-row-period">
+                                <div class="sample-row-period-main">Rahu MD · Jupiter AD</div>
+                                <div class="sample-row-period-sub">Oct 2025 – Feb 2028</div>
+                            </div>
+                            <span class="sample-row-signal peak">Benefic window</span>
                         </div>
-                    </form>
-                    <div class="form-note">Priority access · Pricing on request · Onboarding call included</div>
+                        <div class="sample-row">
+                            <div class="sample-row-period">
+                                <div class="sample-row-period-main">Ketu Pratyantara</div>
+                                <div class="sample-row-period-sub">Feb – May 2026</div>
+                            </div>
+                            <span class="sample-row-signal peak">3 signals · Peak</span>
+                        </div>
+                        <div class="sample-row">
+                            <div class="sample-row-period">
+                                <div class="sample-row-period-main">Venus Pratyantara</div>
+                                <div class="sample-row-period-sub">May – Sep 2026</div>
+                            </div>
+                            <span class="sample-row-signal ok">Neutral</span>
+                        </div>
+                        <div class="sample-row">
+                            <div class="sample-row-period">
+                                <div class="sample-row-period-main">Sun Pratyantara</div>
+                                <div class="sample-row-period-sub">Sep – Oct 2026</div>
+                            </div>
+                            <span class="sample-row-signal caution">Obstruction</span>
+                        </div>
+                        <div class="sample-reading-text">
+                            "<strong>Feb–May 2026 is the highest-confluence window in your next 24 months.</strong> Jupiter transits your 10th from natal Moon (career activation), Saturn separates from natal Sun reducing resistance, and Rahu–Jupiter antardasha is at peak efficacy. Historically, this configuration correlates with significant professional recognition or structural expansion. Window closes May 2026. Post-September: Sun pratyantara with Saturn opposition — not a period for new commitments."
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Research provenance bar -->
-    <div class="research-bar">
-        <div class="research-bar-inner">
-            <p>Kaala runs on the <a href="https://tempora.ltd">Tempora Research engine</a> — <strong>9 research notes</strong>, <strong>300+ historical data points</strong>, <strong>calibrated lift ratios up to 5.46×</strong>, publicly backtested and scored. Every forward window is logged before it opens.</p>
-        </div>
-    </div>
-
-    <!-- Live signals preview -->
-    <div class="signals">
-        <div class="signals-label">Forward Windows</div>
-        <div class="signals-title">What the engine sees next</div>
-        <div class="signals-desc">Logged publicly before the window opens. Outcomes audited. The score is either right or it isn't.</div>
-
-        <div class="signal-cards">
-            <div class="signal-card">
-                <div><span class="signal-flag flag-warning">Watch · Dec 2027</span></div>
-                <div class="signal-country">India</div>
-                <h3>Ketu over Cancer stellium + Angarak Yoga</h3>
-                <p>Ketu transits India's 5-planet Cancer stellium while Mars–Rahu conjunction forms in Capricorn. Dual-axis activation during Rahu–Rahu mahadasha. The chart's most charged configuration since 2019–2020.</p>
-                <div class="signal-data">
-                    <div class="signal-datum"><strong>saturn_moon_opp</strong>Primary signal (3.6x lift)</div>
-                    <div class="signal-datum"><strong>Rahu–Rahu</strong>Active dasha</div>
+    <!-- HOW IT'S COMPUTED -->
+    <div class="how-section">
+        <div class="how-inner">
+            <div class="how-label">The method</div>
+            <h2 class="how-heading">
+                <span class="h-light">Three deterministic layers.</span><br>
+                One confluence score.
+            </h2>
+            <div class="how-steps">
+                <div class="how-step">
+                    <div class="how-step-num">Step 01</div>
+                    <h4>Birth data → Sidereal coordinates</h4>
+                    <p>Your date, time, and place of birth is run through <code>pyswisseph</code> — Swiss Ephemeris, sub-arc-minute precision. Lahiri ayanamsa applied for Vedic sidereal positions. The same computational core used by professional Vedic software. No rounding, no approximation.</p>
                 </div>
-                <div class="signal-badge">Validated · Research Note #006</div>
-            </div>
-
-            <div class="signal-card">
-                <div><span class="signal-flag flag-elevated">Elevated · Feb 2028</span></div>
-                <div class="signal-country">Russia</div>
-                <h3>Angarak Yoga at peak — Mars conjunct Rahu</h3>
-                <p>Russia's #1 validated signal (5.46x historical lift) fires as Rahu return approaches. Every significant Russian geopolitical event in the backtest overlaps this signature. Historically associated with sudden military action.</p>
-                <div class="signal-data">
-                    <div class="signal-datum"><strong>mars_rahu_conj</strong>5.46x lift</div>
-                    <div class="signal-datum"><strong>Rahu return</strong>18.6yr cycle</div>
+                <div class="how-step">
+                    <div class="how-step-num">Step 02</div>
+                    <h4>Vimshottari dasha timeline</h4>
+                    <p>Full 120-year dasha sequence computed from natal Moon nakshatra. Three levels of resolution: Mahadasha (years), Antardasha (months), Pratyantara (weeks). Each period has a ruling planet that sets the operating context for all transit signals computed on top.</p>
                 </div>
-                <div class="signal-badge">Validated · Research Note #006</div>
-            </div>
-
-            <div class="signal-card">
-                <div><span class="signal-flag flag-watch">Watch · Nov 2029</span></div>
-                <div class="signal-country">United States</div>
-                <h3>Rahu over Gemini stellium — 18-year cycle peak</h3>
-                <p>Ketu moves into Gemini (US natal stellium: Sun/Mars/Jupiter/Venus) as malefic opposition simultaneously fires. Saturn transit of natal Sun (4.31x lift) approaches. Venus–Rahu mahadasha active.</p>
-                <div class="signal-data">
-                    <div class="signal-datum"><strong>rahu_over_stell</strong>2.45x lift</div>
-                    <div class="signal-datum"><strong>Venus–Rahu</strong>Active dasha</div>
-                </div>
-                <div class="signal-badge">Validated · Research Note #006</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- The Stack -->
-    <div class="stack">
-        <div class="signals-label" style="text-align:center">The Kaala Stack</div>
-        <div class="signals-title" style="text-align:center">How it works</div>
-        <div class="signals-desc" style="text-align:center">Each layer is independently testable and publicly documented.</div>
-
-        <div class="stack-grid">
-            <div class="stack-item">
-                <div class="stack-item-num">Layer 01</div>
-                <h4>Swiss Ephemeris</h4>
-                <p>Sub-arc-minute planetary positions via <code>pyswisseph</code>. Lahiri ayanamsa for sidereal coordinates. The same computational core used by professional Vedic software.</p>
-            </div>
-            <div class="stack-item">
-                <div class="stack-item-num">Layer 02</div>
-                <h4>Vimshottari Dasha Engine</h4>
-                <p>Full 120-year dasha timeline computed from natal Moon nakshatra. Mahadasha → antardasha → pratyantara (3 levels). Used to determine the operating period of any chart.</p>
-            </div>
-            <div class="stack-item">
-                <div class="stack-item-num">Layer 03</div>
-                <h4>Transit Overlay</h4>
-                <p>Current planetary positions overlaid on natal chart. Computes Vedic special aspects, Sade Sati phases, Guru transit house position, and nodal activations.</p>
-            </div>
-            <div class="stack-item">
-                <div class="stack-item-num">Layer 04</div>
-                <h4>Calibrated Signature Scoring</h4>
-                <p>9 astrological signatures scored 0–1.0 each. Weights derived from Monte Carlo calibration against 300+ historical events. Generic weights replaced by chart-specific empirical lifts. <em>Research Note #005.</em></p>
-            </div>
-            <div class="stack-item">
-                <div class="stack-item-num">Layer 05</div>
-                <h4>Confluence Engine</h4>
-                <p>Weighted sum of active signatures → a single confluence score (0–100%). Windows above threshold where ≥1 validated signature fires are surfaced as predictions.</p>
-            </div>
-            <div class="stack-item">
-                <div class="stack-item-num">Layer 06</div>
-                <h4>Public Scoring &amp; Falsifiability</h4>
-                <p>Every prediction has a specific date, a specific claim, and a public tracker. The system is wrong until proven otherwise. Hits and misses are both recorded.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Market Intelligence section -->
-    <div class="compare" style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 60px; margin: 0 0 60px;">
-        <div class="signals-label" style="text-align:center; color: var(--accent2);">New · Kaala Market</div>
-        <div class="signals-title" style="text-align:center">Nifty 50 Temporal Signal Calendar</div>
-        <div class="signals-desc" style="text-align:center">Weekly caution and recovery windows derived from Panchang rules and astronomical signals — backtested against 19 years of market turning points.</div>
-
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin: 40px 0;">
-            <div style="background:var(--bg); border:1px solid var(--border); border-left:3px solid #ff4d4d; border-radius:12px; padding:20px;">
-                <div style="font-size:11px; color:#ff4d4d; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">▼ Caution</div>
-                <div style="font-size:22px; font-weight:700; color:var(--white); margin-bottom:6px;">1.36×</div>
-                <div style="font-size:13px; color:var(--muted);">Mercury retrograde lift at market peaks. Empirically calibrated.</div>
-            </div>
-            <div style="background:var(--bg); border:1px solid var(--border); border-left:3px solid var(--accent2); border-radius:12px; padding:20px;">
-                <div style="font-size:11px; color:var(--accent2); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">▲ Recovery</div>
-                <div style="font-size:22px; font-weight:700; color:var(--white); margin-bottom:6px;">1.12×</div>
-                <div style="font-size:13px; color:var(--muted);">Auspicious nakshatra lift at market troughs. 66 turning points tested.</div>
-            </div>
-            <div style="background:var(--bg); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:12px; padding:20px;">
-                <div style="font-size:11px; color:var(--accent); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">Rikta Tithi</div>
-                <div style="font-size:22px; font-weight:700; color:var(--white); margin-bottom:6px;">1.28×</div>
-                <div style="font-size:13px; color:var(--muted);">Vedic Siddhanta rule validated. Lunar days 4,9,14 correlate with market peaks.</div>
-            </div>
-        </div>
-
-        <div style="text-align:center;">
-            <a href="market.html" style="display:inline-flex; align-items:center; gap:10px; background:var(--accent2); color:var(--bg); font-weight:600; font-size:14px; padding:14px 32px; border-radius:10px; text-decoration:none;">
-                View Weekly Signal Calendar →
-            </a>
-            <div style="font-size:12px; color:var(--muted); margin-top:14px;">Free during beta · Personal chart overlay coming Phase 2</div>
-        </div>
-    </div>
-
-    <!-- Personal vs Enterprise comparison -->
-    <div class="compare">
-        <div class="signals-label" style="text-align:center">Plans</div>
-        <div class="signals-title" style="text-align:center">Personal or Enterprise</div>
-        <div class="signals-desc" style="text-align:center">Same engine. Different lens.</div>
-
-        <div class="compare-grid">
-            <div class="compare-col">
-                <div class="compare-head personal">Kaala Personal</div>
-                <div class="compare-rows">
-                    <div class="compare-row">Natal chart dasha timeline (full 120yr)</div>
-                    <div class="compare-row">Live transit overlay and window score</div>
-                    <div class="compare-row">Monthly narrative interpretation</div>
-                    <div class="compare-row">Sade Sati and Guru transit alerts</div>
-                    <div class="compare-row">Pratyantara-level breakdown</div>
-                </div>
-                <div class="compare-price">
-                    <strong>Free early access</strong>
-                    Paid plan from $29/mo · No card now
-                </div>
-            </div>
-            <div class="compare-col">
-                <div class="compare-head enterprise">Kaala Enterprise</div>
-                <div class="compare-rows">
-                    <div class="compare-row">6-nation country window predictions</div>
-                    <div class="compare-row">API access (JSON) with signature detail</div>
-                    <div class="compare-row">Custom chart onboarding (any entity)</div>
-                    <div class="compare-row">Monthly Tempora Research briefings</div>
-                    <div class="compare-row">Dedicated onboarding call</div>
-                </div>
-                <div class="compare-price">
-                    <strong>From $499/mo</strong>
-                    Priority onboarding · Pricing on request
+                <div class="how-step">
+                    <div class="how-step-num">Step 03</div>
+                    <h4>Transit overlay → confluence score</h4>
+                    <p>Live planetary positions overlaid on natal chart. Nine astrological signatures scored 0–1.0 each — weights derived from Monte Carlo calibration against 300+ historical events (Research Note #005). Weighted sum produces a single confluence score. Windows above threshold are surfaced as active. Every weight is published.</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- RESEARCH BACKING -->
+    <div class="research-backing">
+        <div class="rb-inner">
+            <div>
+                <h2 class="rb-heading">
+                    <span class="h-light">The score is grounded in</span><br>
+                    published research.
+                </h2>
+                <p class="rb-sub">Kaala runs on the Tempora Research engine — 9 peer-reviewable notes, 300+ historical data points, calibrated lift ratios publicly logged. Every forward window is timestamped before it opens.</p>
+                <a href="https://tempora.ltd" class="rb-link">Read the research →</a>
+            </div>
+            <div>
+                <div class="rb-stats">
+                    <div class="rb-stat">
+                        <div class="rb-stat-num">5.46×</div>
+                        <div class="rb-stat-label">Peak lift · Russia Mars–Rahu</div>
+                    </div>
+                    <div class="rb-stat">
+                        <div class="rb-stat-num">300+</div>
+                        <div class="rb-stat-label">Events calibrated</div>
+                    </div>
+                    <div class="rb-stat">
+                        <div class="rb-stat-num">73%</div>
+                        <div class="rb-stat-label">Corporate inflection at Saturn Return</div>
+                    </div>
+                </div>
+                <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <span style="font-size:9px;letter-spacing:1px;color:#444;border:1px solid #1e1e1e;padding:5px 12px;">Research Note #005 · Calibration methodology</span>
+                    <span style="font-size:9px;letter-spacing:1px;color:#444;border:1px solid #1e1e1e;padding:5px 12px;">Article 012 · Saturn Return + S&P 500</span>
+                    <span style="font-size:9px;letter-spacing:1px;color:#444;border:1px solid #1e1e1e;padding:5px 12px;">Research Note #001 · Signal introduction</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING + FORM -->
+    <div class="pricing-section" id="pricing">
+        <div class="pricing-inner">
+            <div>
+                <div class="pricing-label">Get your reading</div>
+                <h2 class="pricing-heading">Your temporal map, computed.</h2>
+                <p class="pricing-sub">Submit your birth data. We compute your dasha timeline, overlay current transits, score your active windows, and deliver a written reading within 48 hours.</p>
+                <div style="margin-top:40px; padding-top:32px; border-top:1px solid var(--border);">
+                    <p style="font-size:13px; color:var(--muted); line-height:1.8; margin-bottom:16px;">For enterprise — country-level event windows, API access, and custom entity chart analysis — contact us.</p>
+                    <a href="mailto:shivani@tempora.ltd" style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); padding-bottom:1px;">Enterprise inquiry →</a>
+                </div>
+            </div>
+            <div>
+                <div class="pricing-card">
+                    <div class="pricing-card-head">
+                        <div class="pricing-price">₹499</div>
+                        <div class="pricing-price-note">One-time · Full written reading · 48hr delivery</div>
+                    </div>
+                    <div class="pricing-includes">
+                        <div class="pricing-includes-label">What's included</div>
+                        <div class="pricing-feature">Full Vimshottari dasha timeline — 3-level resolution (MD / AD / PD)</div>
+                        <div class="pricing-feature">Current period analysis with transit overlay and confluence score</div>
+                        <div class="pricing-feature">Forward windows — next 12 months, scored and ranked by confluence</div>
+                        <div class="pricing-feature">Written interpretation anchored in calibrated historical patterns</div>
+                        <div class="pricing-feature">Research citations — which notes back each signal in your chart</div>
+                    </div>
+                    <div class="pricing-form">
+                        <div class="pricing-form-label">Your birth data</div>
+                        <form action="https://formspree.io/f/xgopozlo" method="POST">
+                            <input type="hidden" name="_subject" value="Kaala Personal Reading Request">
+                            <div class="pf-row">
+                                <input type="text" name="name" class="pf-input" placeholder="Your name" required>
+                                <input type="email" name="email" class="pf-input" placeholder="your@email.com" required>
+                            </div>
+                            <div class="pf-row">
+                                <input type="text" name="birth_date" class="pf-input" placeholder="Birth date (DD/MM/YYYY)" required>
+                                <input type="text" name="birth_time" class="pf-input" placeholder="Birth time (HH:MM AM/PM)" required>
+                            </div>
+                            <input type="text" name="birth_place" class="pf-input" placeholder="Birth place (city, country)" required style="width:100%; margin-bottom:8px;">
+                            <button type="submit" class="pf-submit">Submit — ₹499 →</button>
+                            <div class="pf-note">Payment link sent to your email · Reading delivered within 48 hours</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORWARD WINDOWS -->
+    <div class="windows-section">
+        <div class="windows-inner">
+            <div class="windows-label">Public prediction log</div>
+            <h2 class="windows-heading">
+                <span class="h-light">What the engine sees</span><br>
+                next — globally.
+            </h2>
+            <p class="windows-sub">Every forward window logged before it opens. Outcomes audited. The score is either right or it isn't.</p>
+            <div class="signal-cards">
+                <div class="signal-card">
+                    <span class="signal-flag flag-warning">Watch · Dec 2027</span>
+                    <div class="signal-country">India</div>
+                    <h3>Ketu over Cancer stellium + Angarak Yoga</h3>
+                    <p>Ketu transits India's 5-planet Cancer stellium while Mars–Rahu conjunction forms in Capricorn. Dual-axis activation during Rahu–Rahu mahadasha.</p>
+                    <div class="signal-data">
+                        <div class="signal-datum"><strong>saturn_moon_opp</strong>Primary · 3.6× lift</div>
+                        <div class="signal-datum"><strong>Rahu–Rahu</strong>Active dasha</div>
+                    </div>
+                    <div class="signal-source">Research Note #006 · #002</div>
+                </div>
+                <div class="signal-card">
+                    <span class="signal-flag flag-elevated">Elevated · Feb 2028</span>
+                    <div class="signal-country">Russia</div>
+                    <h3>Angarak Yoga at peak — Mars conjunct Rahu</h3>
+                    <p>Russia's highest-validated signal (5.46× historical lift) fires as Rahu return approaches. Every significant geopolitical event in the backtest overlaps this signature.</p>
+                    <div class="signal-data">
+                        <div class="signal-datum"><strong>mars_rahu_conj</strong>5.46× lift</div>
+                        <div class="signal-datum"><strong>Rahu return</strong>18.6yr cycle</div>
+                    </div>
+                    <div class="signal-source">Research Note #006 · #004</div>
+                </div>
+                <div class="signal-card">
+                    <span class="signal-flag flag-watch">Watch · Nov 2029</span>
+                    <div class="signal-country">United States</div>
+                    <h3>Rahu over Gemini stellium — 18-year cycle peak</h3>
+                    <p>Ketu moves into Gemini natal stellium as Saturn transit of natal Sun (4.31× lift) approaches. Venus–Rahu mahadasha active. The most significant US window since 2001.</p>
+                    <div class="signal-data">
+                        <div class="signal-datum"><strong>rahu_over_stell</strong>2.45× lift</div>
+                        <div class="signal-datum"><strong>Venus–Rahu</strong>Active dasha</div>
+                    </div>
+                    <div class="signal-source">Research Note #006 · #004</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
-        <p>Kaala is a product of <a href="../">Tempora Research</a> &nbsp;·&nbsp; Not financial advice &nbsp;·&nbsp; &copy; 2026 Tempora</p>
+        <div class="footer-inner">
+            <p>Kaala is a product of <a href="https://tempora.ltd" style="color:var(--muted);border-bottom:1px solid var(--border);">Tempora Research</a> &nbsp;·&nbsp; Not financial or medical advice &nbsp;·&nbsp; © 2026 Tempora</p>
+            <div class="footer-links">
+                <a href="research.html">Research</a>
+                <a href="https://tempora.ltd">Tempora.ltd</a>
+                <a href="mailto:shivani@tempora.ltd">Enterprise</a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        function switchTier(tier, el) {
-            document.querySelectorAll('.tier-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tier-content').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            document.getElementById('tier-' + tier).classList.add('active');
-        }
+        const observer = new IntersectionObserver(
+            entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
+            { threshold: 0.08 }
+        );
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
